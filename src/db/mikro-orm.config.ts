@@ -1,6 +1,5 @@
 import { Options } from "@mikro-orm/core";
 import { PostgreSqlDriver } from "@mikro-orm/postgresql";
-import { TsMorphMetadataProvider } from "@mikro-orm/reflection";
 
 const config: Options = {
   driver: PostgreSqlDriver,
@@ -11,7 +10,6 @@ const config: Options = {
   dbName: "to-do",
   entities: ["dist/**/*.entity.js"],
   entitiesTs: ["src/**/*.entity.ts"],
-  metadataProvider: TsMorphMetadataProvider,
   migrations: {
     path: "src/db/migrations",
   },
