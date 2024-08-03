@@ -22,4 +22,8 @@ export class TasksService {
   async findAllTasks(): Promise<Task[]> {
     return await this.tasksRepository.findAll();
   }
+
+  async findOne(id: number): Promise<Task | null> {
+    return await this.tasksRepository.findOneOrFail(id);
+  }
 }
