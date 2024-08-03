@@ -2,7 +2,7 @@ import { Injectable, InternalServerErrorException } from "@nestjs/common";
 
 import { TasksRepository } from "./tasks.repository";
 import { Task } from "../common/entities/task.entity";
-import { CreateTaskDto } from "./dtos/create-task.dto";
+import { CreateTaskDto, UpdateTaskDto } from "./tasks.dtos";
 
 @Injectable()
 export class TasksService {
@@ -30,5 +30,9 @@ export class TasksService {
   async deleteTask(id: number): Promise<void> {
     const task = await this.tasksRepository.findOneOrFail({ id });
     await this.tasksRepository.removeTask(task);
+  }
+  async updateTask(id: number, updateTaskDto: UpdateTaskDto): Promise<Task> {
+    const task = await this.tasksRepository.findOneOrFail({ id });
+    return await this.tasksRepository.updateOne(task, updateTaskDto);
   }
 }
