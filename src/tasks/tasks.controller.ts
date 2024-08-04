@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   Put,
+  Patch,
 } from "@nestjs/common";
 
 import { TasksService } from "./tasks.service";
@@ -52,5 +53,10 @@ export class TasksController {
   @Put(":id")
   async updateTask(@Param("id") id: string, @Body() taskData: UpdateTaskDto) {
     return this.tasksService.updateTask(Number(id), taskData);
+  }
+
+  @Patch(":id/complete")
+  async toggleCompletion(@Param("id") id: number): Promise<Task> {
+    return this.tasksService.toggleCompletion(id);
   }
 }
