@@ -39,10 +39,16 @@ export class TasksController {
     return this.tasksService.findOne(id);
   }
 
+  @Delete("completed")
+  async removeAllCompletedTasks(): Promise<boolean> {
+    return await this.tasksService.removeCompletedTasks();
+  }
+
   @Delete(":id")
   async deleteTask(@Param("id") id: number): Promise<void> {
     return await this.tasksService.deleteTask(id);
   }
+
   @Put(":id")
   async updateTask(@Param("id") id: string, @Body() taskData: UpdateTaskDto) {
     return this.tasksService.updateTask(Number(id), taskData);

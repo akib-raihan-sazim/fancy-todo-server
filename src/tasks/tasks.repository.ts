@@ -24,4 +24,8 @@ export class TasksRepository extends EntityRepository<Task> {
     await this.em.flush();
     return task;
   }
+
+  async removeCompletedTasks(tasks: Task[]): Promise<void> {
+    await this.em.removeAndFlush(tasks);
+  }
 }
