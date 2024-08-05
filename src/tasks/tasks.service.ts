@@ -31,8 +31,16 @@ export class TasksService {
     const task = await this.tasksRepository.findOneOrFail({ id });
     await this.tasksRepository.removeTask(task);
   }
+
   async updateTask(id: number, updateTaskDto: UpdateTaskDto): Promise<Task> {
     const task = await this.tasksRepository.findOneOrFail({ id });
     return await this.tasksRepository.updateOne(task, updateTaskDto);
+  }
+
+  async removeCompletedTasks(): Promise<void> {
+    const completedTasks = await this.tasksRepository.find({ completed: true });
+    if (completedTasks.length > 0) {
+      await this.tasksRepository.removeCompletedTasks(completedTasks);
+    }
   }
 }
