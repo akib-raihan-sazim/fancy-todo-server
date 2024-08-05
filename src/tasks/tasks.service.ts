@@ -18,4 +18,8 @@ export class TasksService {
       );
     }
   }
+
+  async findAllTasks(): Promise<Task[]> {
+    return await this.tasksRepository.findAll();
+  }
 }

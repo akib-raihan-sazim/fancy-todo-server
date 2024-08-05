@@ -3,6 +3,7 @@ import {
   Post,
   Body,
   InternalServerErrorException,
+  Get,
 } from "@nestjs/common";
 
 import { TasksService } from "./tasks.service";
@@ -23,5 +24,10 @@ export class TasksController {
         error.message,
       );
     }
+  }
+
+  @Get()
+  async findAllTasks(): Promise<Task[]> {
+    return await this.tasksService.findAllTasks();
   }
 }
