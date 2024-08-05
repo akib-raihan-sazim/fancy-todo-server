@@ -26,4 +26,9 @@ export class TasksService {
   async findOne(id: number): Promise<Task | null> {
     return await this.tasksRepository.findOneOrFail(id);
   }
+
+  async deleteTask(id: number): Promise<void> {
+    const task = await this.tasksRepository.findOneOrFail({ id });
+    await this.tasksRepository.removeTask(task);
+  }
 }

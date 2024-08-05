@@ -5,6 +5,7 @@ import {
   InternalServerErrorException,
   Get,
   Param,
+  Delete,
 } from "@nestjs/common";
 
 import { TasksService } from "./tasks.service";
@@ -35,5 +36,10 @@ export class TasksController {
   @Get(":id")
   async findTaskById(@Param("id") id: number): Promise<Task | null> {
     return this.tasksService.findOne(id);
+  }
+
+  @Delete(":id")
+  async deleteTask(@Param("id") id: number): Promise<void> {
+    return await this.tasksService.deleteTask(id);
   }
 }
