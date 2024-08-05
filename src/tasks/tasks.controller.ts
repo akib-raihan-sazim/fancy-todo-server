@@ -4,6 +4,7 @@ import {
   Body,
   InternalServerErrorException,
   Get,
+  Param,
 } from "@nestjs/common";
 
 import { TasksService } from "./tasks.service";
@@ -29,5 +30,10 @@ export class TasksController {
   @Get()
   async findAllTasks(): Promise<Task[]> {
     return await this.tasksService.findAllTasks();
+  }
+
+  @Get(":id")
+  async findTaskById(@Param("id") id: number): Promise<Task | null> {
+    return this.tasksService.findOne(id);
   }
 }
