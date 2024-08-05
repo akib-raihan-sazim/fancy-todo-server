@@ -18,4 +18,10 @@ export class TasksRepository extends EntityRepository<Task> {
   async removeTask(task: Task): Promise<void> {
     await this.em.removeAndFlush(task);
   }
+
+  async updateOne(task: Task, taskData: Partial<Task>): Promise<Task> {
+    this.assign(task, taskData);
+    await this.em.flush();
+    return task;
+  }
 }

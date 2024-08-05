@@ -28,3 +28,26 @@ export class CreateTaskDto {
   @IsOptional()
   completed?: boolean = false;
 }
+
+export class UpdateTaskDto {
+  @IsString()
+  @IsOptional()
+  title?: string;
+
+  @IsString()
+  @IsOptional()
+  summary?: string;
+
+  @IsDate()
+  @IsOptional()
+  @Transform(({ value }) => (value ? new Date(value) : null))
+  dueDate: Date | null;
+
+  @IsEnum(ETaskPriority)
+  @IsOptional()
+  priority?: ETaskPriority;
+
+  @IsBoolean()
+  @IsOptional()
+  completed?: boolean;
+}
