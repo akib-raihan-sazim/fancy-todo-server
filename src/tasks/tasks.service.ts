@@ -43,4 +43,10 @@ export class TasksService {
       await this.tasksRepository.removeCompletedTasks(completedTasks);
     }
   }
+
+  async toggleCompletion(id: number): Promise<Task> {
+    const task = await this.tasksRepository.findOneOrFail({ id });
+    task.completed = !task.completed;
+    return await this.tasksRepository.toggleCompletion(task);
+  }
 }
